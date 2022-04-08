@@ -1,5 +1,10 @@
 /// <reference path="../global.d.ts" />
 
+/*
+ * Some points of interest:
+ * sc.CrossCode#start
+ */
+
 ig.module('playground').defines(() => {
   sc.PlaygroundStartGui = ig.GuiElementBase.extend({
     transitions: {
@@ -50,6 +55,41 @@ ig.module('playground').defines(() => {
       this.parent();
       this.startGui = new sc.PlaygroundStartGui();
       this.addChildGui(this.startGui);
+    },
+  });
+
+  sc.TitleScreenButtonGui.inject({
+    init() {
+      this.parent();
+      let exploreButton = new sc.ButtonGui('Explore', sc.BUTTON_DEFAULT_WIDTH);
+      exploreButton.setPos(12, this.buttons.last().hook.pos.y + 28);
+      exploreButton.setAlign(ig.GUI_ALIGN.X_LEFT, ig.GUI_ALIGN.Y_BOTTOM);
+      exploreButton.hook.transitions = {
+        DEFAULT: {
+          state: {},
+          time: 0.2,
+          timeFunction: KEY_SPLINES.EASE,
+        },
+        HIDDEN: {
+          state: {
+            offsetX: -(sc.BUTTON_DEFAULT_WIDTH + 12),
+          },
+          time: 0.2,
+          timeFunction: KEY_SPLINES.LINEAR,
+        },
+      };
+      exploreButton.onButtonPress = function () {
+        // TODO: IMPROVE!!! Refer to new game button
+        this.changelogGui.clearLogs();
+        ig.bgm.clear('MEDIUM_OUT');
+        ig.interact.removeEntry(this.buttonInteract);
+        ig.game.teleport('Playground', new ig.TeleportPosition('main'), 'NEW');
+      }.bind(this);
+      exploreButton.doStateTransition('DEFAULT', true);
+      this.buttonGroup.addFocusGui(exploreButton, 0, this.buttons.length);
+      this.addChildGui(exploreButton);
+      this.namedButtons['explore'] = exploreButton;
+      this.buttons.push(exploreButton);
     },
   });
 });
