@@ -1,0 +1,7 @@
+{
+  "id": "playground",
+  "version": "1.0.0",
+  "name": "Playground",
+  "description": "The J.",
+  "prestart": "src/prestart.js"
+}
