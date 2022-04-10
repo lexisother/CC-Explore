@@ -50,6 +50,20 @@ ig.module('playground').defines(() => {
     },
   });
 
+  sc.START_MODE.EXPLORE = Object.keys(sc.START_MODE).length;
+  sc.CrossCode.inject({
+    transitionEnded() {
+      if (
+        sc.model.currentSubState == sc.GAME_MODEL_SUBSTATE.NEWGAME &&
+        this._startMode == sc.START_MODE.EXPLORE
+      ) {
+        this.teleport('Playground', new ig.TeleportPosition('main'), 'NEW');
+      } else {
+        this.parent();
+      }
+    },
+  });
+
   sc.TitleScreenGui.inject({
     init() {
       this.parent();
@@ -79,13 +93,10 @@ ig.module('playground').defines(() => {
         },
       };
       exploreButton.onButtonPress = function () {
-        // TODO: IMPROVE!!! Refer to new game button
         this.changelogGui.clearLogs();
         ig.bgm.clear('MEDIUM_OUT');
         ig.interact.removeEntry(this.buttonInteract);
-        sc.model.enterNewGame();
-        sc.model.enterGame();
-        ig.game.teleport('Playground', new ig.TeleportPosition('main'), 'NEW');
+        ig.game.start(sc.START_MODE.EXPLORE, 1);
       }.bind(this);
       exploreButton.doStateTransition('DEFAULT', true);
       this.buttonGroup.addFocusGui(exploreButton, 0, this.buttons.length);
