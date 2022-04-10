@@ -83,6 +83,8 @@ ig.module('playground').defines(() => {
         this.changelogGui.clearLogs();
         ig.bgm.clear('MEDIUM_OUT');
         ig.interact.removeEntry(this.buttonInteract);
+        sc.model.enterNewGame();
+        sc.model.enterGame();
         ig.game.teleport('Playground', new ig.TeleportPosition('main'), 'NEW');
       }.bind(this);
       exploreButton.doStateTransition('DEFAULT', true);
