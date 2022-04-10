@@ -1,5 +1,10 @@
 {
-  "dependencies": {
-    "ultimate-crosscode-typedefs": "dmitmel/ultimate-crosscode-typedefs"
+  "devDependencies": {
+    "typescript": "^4.6.3",
+    "ultimate-crosscode-typedefs": "github:dmitmel/ultimate-crosscode-typedefs"
+  },
+  "scripts": {
+    "build": "tsc --build",
+    "watch": "tsc --build --watch"
   }
 }
