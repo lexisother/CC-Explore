@@ -1,13 +1,13 @@
 /// <reference path="../../global.d.ts" />
 import './press-start.js';
 
-ig.module('playground.title-screen')
-  .requires('playground.start-gui')
+ig.module('ccexplore.title-screen')
+  .requires('ccexplore.start-gui')
   .defines(() => {
     sc.TitleScreenGui.inject({
       init() {
         this.parent();
-        this.startGui = new sc.PlaygroundStartGui();
+        this.startGui = new sc.CCExploreStartGui();
         this.addChildGui(this.startGui);
       },
     });

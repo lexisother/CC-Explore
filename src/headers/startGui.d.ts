@@ -2,7 +2,7 @@ export {};
 
 declare global {
   namespace sc {
-    interface PlaygroundStartGui extends ig.GuiElementBase {
+    interface CCExploreStartGui extends ig.GuiElementBase {
       transitions: { [name: string]: ig.GuiHook.Transition };
       gfx: ig.Image;
       timer: ig.WeightTimer;
@@ -10,13 +10,13 @@ declare global {
       show(): void;
       hide(): void;
     }
-    interface PlaygroundStartGuiConstructor extends ImpactClass<PlaygroundStartGui> {
-      new (): PlaygroundStartGui;
+    interface CCExploreStartGuiConstructor extends ImpactClass<CCExploreStartGui> {
+      new (): CCExploreStartGui;
     }
-    let PlaygroundStartGui: PlaygroundStartGuiConstructor;
+    let CCExploreStartGui: CCExploreStartGuiConstructor;
 
     interface TitleScreenGui extends ig.GuiElementBase {
-      startGui: sc.PlaygroundStartGui;
+      startGui: sc.CCExploreStartGui;
     }
 
     interface ChangelogGui extends ig.GuiElementBase {

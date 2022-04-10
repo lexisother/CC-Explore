@@ -1,7 +1,7 @@
 {
-  "id": "playground",
+  "id": "CC-Explore",
   "version": "1.0.0",
-  "name": "Playground",
-  "description": "The J.",
+  "name": "CC-Explore",
+  "description": "A CrossCode mod aimed at exploration.",
   "prestart": "dist/prestart.js"
 }

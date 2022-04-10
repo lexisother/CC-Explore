@@ -1,6 +1,6 @@
 /// <reference path="../../global.d.ts" />
-ig.module('playground.start-gui').defines(() => {
-  sc.PlaygroundStartGui = ig.GuiElementBase.extend({
+ig.module('ccexplore.start-gui').defines(() => {
+  sc.CCExploreStartGui = ig.GuiElementBase.extend({
     transitions: {
       DEFAULT: {
         state: {},
