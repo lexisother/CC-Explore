@@ -1,0 +1,58 @@
+extends: eslint-config-dmitmel/presets/node
+env:
+  browser: true
+parserOptions:
+  project: tsconfig.json
+  sourceType: module
+
+settings:
+  node:
+    allowModules:
+      - ultimate-crosscode-typedefs
+
+rules:
+  func-names: off
+
+  node/no-unsupported-features/es-syntax:
+    - error
+    - ignores:
+        - modules
+        - dynamicImport
+  node/no-unsupported-features/node-builtins:
+    - error
+    - ignores:
+        - fs.promises
+
+overrides:
+  - files: '**/*.ts'
+    extends: eslint-config-dmitmel/presets/typescript-with-type-checking-addon
+    rules:
+      # because I have to use '.js' file extensions in imports
+      node/no-missing-import: off
+
+      '@typescript-eslint/naming-convention':
+        - warn
+        - selector: default
+          format: null
+          filter:
+            regex: '^en_US|de_DE|fr_FR|ru_RU|zh_CN|ja_JP|ko_KR$'
+            match: true
+        - selector: default
+          format:
+            - camelCase
+            - PascalCase
+            - UPPER_CASE
+          leadingUnderscore: allow
+          trailingUnderscore: allow
+          filter:
+            regex: '^[a-zA-Z_$][a-zA-Z0-9_$]*$'
+            match: true
+
+  - files: '**/*.d.ts'
+    rules:
+      # <https://github.com/dmitmel/ultimate-crosscode-typedefs/blob/f09433a688bf1db86172f40aa4156566ae1d2c1e/.eslintrc.yml#L37-L39>
+      '@typescript-eslint/no-unused-vars': off
+
+  - files: 'src/**/*.ts'
+    parserOptions:
+      project: 'tsconfig.json'

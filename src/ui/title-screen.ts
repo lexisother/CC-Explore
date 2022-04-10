@@ -41,7 +41,7 @@ ig.module('playground.title-screen')
         exploreButton.doStateTransition('DEFAULT', true);
         this.buttonGroup.addFocusGui(exploreButton, 0, this.buttons.length);
         this.addChildGui(exploreButton);
-        this.namedButtons['explore'] = exploreButton;
+        this.namedButtons.explore = exploreButton;
         this.buttons.push(exploreButton);
       },
     });

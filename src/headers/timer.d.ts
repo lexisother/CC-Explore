@@ -13,6 +13,6 @@ declare global {
     interface WeightTimerConstructor extends ImpactClass<WeightTimer> {
       new (actualTick: boolean, duration: number, mode: number): WeightTimer;
     }
-    var WeightTimer: WeightTimerConstructor;
+    let WeightTimer: WeightTimerConstructor;
   }
 }

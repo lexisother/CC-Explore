@@ -13,7 +13,7 @@ declare global {
     interface PlaygroundStartGuiConstructor extends ImpactClass<PlaygroundStartGui> {
       new (): PlaygroundStartGui;
     }
-    var PlaygroundStartGui: PlaygroundStartGuiConstructor;
+    let PlaygroundStartGui: PlaygroundStartGuiConstructor;
 
     interface TitleScreenGui extends ig.GuiElementBase {
       startGui: sc.PlaygroundStartGui;
@@ -25,7 +25,7 @@ declare global {
     interface ChangelogGuiConstructor extends ImpactClass<ChangelogGui> {
       new (): ChangelogGui;
     }
-    var ChangelogGui: ChangelogGuiConstructor;
+    let ChangelogGui: ChangelogGuiConstructor;
 
     interface TitleScreenButtonGui extends ig.GuiElementBase {
       namedButtons: { [name: string]: sc.ButtonGui };
