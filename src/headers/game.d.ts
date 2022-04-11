@@ -18,13 +18,16 @@ declare global {
       EXPLORE = 32789
     }
 
-    interface OptionsMenu extends BaseMenu {
-      a: string;
+    interface ExploreMenu extends BaseMenu {
+      buttonGroup: ig.ButtonGroup
+
+      onBackButtonPress(): void;
+      modelChanged(): void;
     }
-    interface OptionsMenuConstructor extends ImpactClass<OptionsMenu> {
-      new (): OptionsMenu;
+    interface ExploreMenuConstructor extends ImpactClass<ExploreMenu> {
+      new (): ExploreMenu;
     }
-    let OptionsMenu: OptionsMenuConstructor;
+    let ExploreMenu: ExploreMenuConstructor;
 
     interface GameModel {
       enterReset(): void;
