@@ -1,9 +1,9 @@
-export {}
+export {};
 
 declare global {
-    namespace ig {
-        interface ButtonInteractEntry {
-            removeButtonGroup(this: this, buttonGroup: ig.ButtonGroup): void;
-        }
+  namespace ig {
+    interface ButtonInteractEntry {
+      removeButtonGroup(this: this, buttonGroup: ig.ButtonGroup): void;
     }
+  }
 }
