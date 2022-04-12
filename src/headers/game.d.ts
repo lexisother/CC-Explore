@@ -15,13 +15,18 @@ declare global {
       EXPLORE = 32789,
     }
     enum MENU_SUBMENU {
-      EXPLORE = 32789
+      EXPLORE = 32789,
     }
 
     interface ExploreMenu extends BaseMenu {
-      buttonGroup: ig.ButtonGroup
+      buttonInteract: ig.ButtonInteractEntry;
+      buttongroup: ig.ButtonGroup;
+      content: ig.GuiElementBase;
+      startButton: sc.ButtonGui;
+      msgBox: sc.CenterBoxGui;
 
       onBackButtonPress(): void;
+      onBeginButtonPress(): void;
       modelChanged(): void;
     }
     interface ExploreMenuConstructor extends ImpactClass<ExploreMenu> {
@@ -31,6 +36,7 @@ declare global {
 
     interface GameModel {
       enterReset(): void;
+      enterRunning(): void;
     }
     interface MenuModel {
       optionsLocalMode: boolean;
@@ -39,14 +45,15 @@ declare global {
       _startMode: sc.START_MODE;
       transitionTimer: number;
       currentTeleportColor: {
-        r: number,
-        g: number,
-        b: number,
-        lighter: boolean
-      }
+        r: number;
+        g: number;
+        b: number;
+        lighter: boolean;
+      };
 
       transitionEnded(): void;
       setTeleportColor(r: number, g: number, b: number, lighter: boolean): void;
+      setPaused(paused: boolean): void;
     }
   }
 }
