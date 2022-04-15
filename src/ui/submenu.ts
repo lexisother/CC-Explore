@@ -6,6 +6,8 @@ sc.ExploreMenu = sc.BaseMenu.extend({
     this.hook.size.x = ig.system.width;
     this.hook.size.y = ig.system.height;
 
+    ig.lang.labels.sc.gui.menu['menu-titles'].explore = 'Explore';
+
     this.content = new ig.GuiElementBase();
     this.content.setSize(160, 110);
 
