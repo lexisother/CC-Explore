@@ -7,8 +7,8 @@ declare global {
       gfx: ig.Image;
       timer: ig.WeightTimer;
 
-      show(): void;
-      hide(): void;
+      show(this: this): void;
+      hide(this: this): void;
     }
     interface CCExploreStartGuiConstructor extends ImpactClass<CCExploreStartGui> {
       new (): CCExploreStartGui;

@@ -65,7 +65,7 @@ declare global {
         lighter: boolean;
       };
 
-      transitionEnded(): void;
+      transitionEnded(this: this): void;
       setTeleportColor(r: number, g: number, b: number, lighter: boolean): void;
       setPaused(paused: boolean): void;
     }

@@ -8,9 +8,8 @@ sc.CrossCode.inject({
       sc.model.currentSubState === sc.GAME_MODEL_SUBSTATE.NEWGAME &&
       this._startMode === sc.START_MODE.EXPLORE
     ) {
-      this.teleport!('Playground', new ig.TeleportPosition('main'), 'NEW');
+      this.teleport('Playground', new ig.TeleportPosition('main'), 'NEW');
     } else {
-      // @ts-expect-error `parent` always exists...
       this.parent();
     }
   },

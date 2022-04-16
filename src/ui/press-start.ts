@@ -32,11 +32,9 @@ ig.module('ccexplore.start-gui').defines(() => {
       this.doStateTransition('HIDDEN', true);
     },
     show() {
-      // @ts-expect-error ...how the hell can `this` be undefined?
       this.doStateTransition('DEFAULT');
     },
     hide() {
-      // @ts-expect-error ...how the hell can `this` be undefined?
       this.doStateTransition('HIDDEN');
     },
     update() {
