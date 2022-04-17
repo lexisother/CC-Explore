@@ -17,13 +17,39 @@ declare global {
     enum MENU_SUBMENU {
       EXPLORE = 32789,
     }
+    enum MAP_EVENT {
+      MAP_CHANGED = 32789,
+    }
+
+    interface Control {
+      menuCircleLeft(): boolean;
+      menuCircleRight(): boolean;
+    }
 
     interface GameModel {
       enterReset(): void;
       enterRunning(): void;
     }
+
+    type nullableGetter = null | (() => unknown);
+    type nullableSetter = null | ((value: unknown) => void);
+
     interface MenuModel {
       optionsLocalMode: boolean;
+      additionalStates: { [index: string]: unknown };
+      additionalStateGets: { [index: string]: nullableGetter };
+      additionalStateSets: { [index: string]: nullableSetter };
+
+      registerAdditionalState(
+        this: this,
+        stateName: string,
+        get: nullableGetter,
+        set: nullableSetter,
+        initialValue: unknown,
+      ): void;
+
+      getAS(this: this, key: string): unknown;
+      setAS(this: this, key: string, value: unknown): void;
     }
     interface CrossCode extends ig.Game {
       _startMode: sc.START_MODE;

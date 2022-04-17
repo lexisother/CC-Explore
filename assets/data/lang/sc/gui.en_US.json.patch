@@ -1,0 +1,12 @@
+{
+  "labels": {
+    "menu": {
+      "world": {
+        "page": {
+          "croissant": "Croissant",
+          "explore": "Explore"
+        }
+      }
+    }
+  }
+}

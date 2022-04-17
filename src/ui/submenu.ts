@@ -11,7 +11,7 @@ sc.ExploreMenuButtonGui = ig.GuiElementBase.extend({
 
     this.buttongroup = new sc.ButtonGroup();
   },
-  pushButton(button: ig.FocusGui) {
+  pushButton(button) {
     // Increase the max height to correct the sizing to fit the children
     this.maxHeight = Math.max(this.maxHeight, button.hook.size.y);
 
@@ -32,7 +32,7 @@ sc.ExploreMenuButtonGui = ig.GuiElementBase.extend({
     this.buttongroup.addFocusGui(button, this.hook.children.length - 1, 0);
   },
 
-  pushButtons(buttons: ig.FocusGui[]) {
+  pushButtons(buttons) {
     for (let i = 0; i < buttons.length; i++) {
       this.pushButton(buttons[i]);
     }
@@ -135,7 +135,7 @@ sc.ExploreMenu = sc.BaseMenu.extend({
   modelChanged(..._args: unknown[]) {},
 });
 
-// @ts-expect-error It doesn't dd*actually* exist in-game, so we have to assign it.
+// @ts-expect-error It doesn't *actually* exist in-game, so we have to assign it.
 sc.MENU_SUBMENU.EXPLORE = Math.max(...Object.values(sc.MENU_SUBMENU)) + 1;
 sc.SUB_MENU_INFO[sc.MENU_SUBMENU.EXPLORE] = {
   Clazz: sc.ExploreMenu,
