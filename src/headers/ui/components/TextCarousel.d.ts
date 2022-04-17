@@ -9,11 +9,12 @@ declare global {
       activeText: TextGui;
       index: number;
       cyclic: boolean;
+      padding: number;
       onChange: (index: number) => void;
 
       show(this: this): void;
       hide(this: this): void;
-      updateCurrentPageName(this: this): void;
+      updateCurrentPageName(this: this, delta: number): void;
       updateStatusPage(this: this, delta: number): void;
       onLeftPressCheck(): boolean;
       onRightPressCheck(): boolean;
