@@ -50,24 +50,19 @@ sc.ExploreMenu = sc.BaseMenu.extend({
     this.buttons.setAlign(ig.GUI_ALIGN.X_CENTER, ig.GUI_ALIGN.Y_BOTTOM);
     this.buttons.setPos(0, 5);
 
-    // Prevent `MISSING_LABEL` from being shown in the menu
-    ig.lang.labels.sc.gui.menu['menu-titles'].explore = 'Explore';
-
     // Wrapper structuring
     this.content = new ig.GuiElementBase();
     this.msgBox = new sc.CenterBoxGui(this.content);
     this.msgBox.setAlign(ig.GUI_ALIGN.X_CENTER, ig.GUI_ALIGN.Y_CENTER);
 
     // Textual content sizing
-    let text = new sc.TextGui(
-      'Note: CC-Explore is \\c[1]unfinished\\c[0].\nBug reports can be submitted on the GitHub repository.\nThank you for checking out the mod!',
-    );
+    let text = new sc.TextGui(ig.lang.get('sc.gui.menu.explore.introduction'));
     text.setAlign(ig.GUI_ALIGN.X_CENTER, ig.GUI_ALIGN.Y_TOP);
     text.setTextAlign(ig.Font.ALIGN.CENTER);
 
     // Create the buttons and assign their invocation callbacks
-    let startButton = new sc.ButtonGui('Start');
-    let githubButton = new sc.ButtonGui('GitHub');
+    let startButton = new sc.ButtonGui(ig.lang.get('sc.gui.menu.explore.buttons.start'));
+    let githubButton = new sc.ButtonGui(ig.lang.get('sc.gui.menu.explore.buttons.github'));
     startButton.onButtonPress = this.onBeginButtonPress;
     githubButton.onButtonPress = this.onGitButtonPress;
 

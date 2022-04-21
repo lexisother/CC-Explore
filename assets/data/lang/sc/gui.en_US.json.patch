@@ -1,0 +1,16 @@
+{
+  "labels": {
+    "menu": {
+      "menu-titles": {
+        "explore": "Explore"
+      },
+      "explore": {
+        "buttons": {
+          "start": "Start",
+          "github": "GitHub"
+        },
+        "introduction": "Note: CC-Explore is \\c[1]unfinished\\c[0].\nBug reports can be submitted on the GitHub repository.\nThank you for checking out the mod!"
+      }
+    }
+  }
+}
