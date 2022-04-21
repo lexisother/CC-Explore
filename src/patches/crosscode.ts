@@ -8,7 +8,7 @@ sc.CrossCode.inject({
       sc.model.currentSubState === sc.GAME_MODEL_SUBSTATE.NEWGAME &&
       this._startMode === sc.START_MODE.EXPLORE
     ) {
-      this.teleport('Playground', new ig.TeleportPosition('main'), 'NEW');
+      this.teleport('explore.entrance', new ig.TeleportPosition('main'), 'NEW');
     } else {
       this.parent();
     }
