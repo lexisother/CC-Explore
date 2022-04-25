@@ -16,8 +16,8 @@ declare global {
       hide(this: this): void;
       updateCurrentPageName(this: this, delta: number): void;
       updateStatusPage(this: this, delta: number): void;
-      onLeftPressCheck(): boolean;
-      onRightPressCheck(): boolean;
+      onLeftPressCheck(this: this): boolean;
+      onRightPressCheck(this: this): boolean;
     }
     interface TextCarouselConstructor extends ImpactClass<TextCarousel> {
       new (labelPath: string, labels: string[], width?: number): TextCarousel;
