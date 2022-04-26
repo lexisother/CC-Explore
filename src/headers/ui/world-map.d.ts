@@ -20,7 +20,7 @@ declare global {
       gfx: ig.Image;
     }
     interface CustomWorldMapExtraConstructor extends ImpactClass<CustomWorldMapExtra> {
-      new (imageData: MapModel.AltImage, showOverlay: boolean): CustomWorldMapExtra;
+      new (areaData: MapModel.Area, showOverlay: boolean): CustomWorldMapExtra;
     }
     let CustomWorldMapExtra: CustomWorldMapExtraConstructor;
 
@@ -34,6 +34,7 @@ declare global {
         w: number;
         h: number;
         skipOverlay: boolean;
+        positioning?: "absolute" | "relative";
       }
 
       interface Area {

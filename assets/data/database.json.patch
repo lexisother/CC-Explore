@@ -8,6 +8,19 @@
 
     "_comment": "Note: this is just using Autumn's Rise as an example."
 },{
+    "type": "SET_KEY",
+    "index": "altImg",
+    "content": {
+        "src": "media/gui/world-maps/explore/test.png",
+        "x": -20,
+        "y": -20,
+        "w": 41,
+        "h": 41,
+        "srcX": 0,
+        "srcY": 0,
+        "positioning": "relative"
+    }
+},{
     "type": "EXIT",
     "count": 1
 },{

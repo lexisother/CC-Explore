@@ -6,7 +6,6 @@ sc.MapWorldMap.inject({
   customMaps: {
     explore: new ig.Image("media/gui/world-maps/explore.png")
   },
-  // ...also possibly make this global? 
   customMapIndex: "croissant",
   areaGuis: [],
 
@@ -57,14 +56,14 @@ sc.MapWorldMap.inject({
         && (area.customMap || "croissant") === this.customMapIndex
       ) {
         if (area.altImg) {
-          let varString = (this.customMapIndex === "croissant") ? `menu.circuit.start.${key}` : `menu.map.${area.customMap}.${key}.start`, 
+          let varString = (this.customMapIndex === "croissant") ? `menu.circuit.start.${key}` : `menu.map.${area.customMap}.${key}`, 
             showOverlay = false;
           if(!(area.altImg.skipOverlay || ig.vars.get(varString))) {
             showOverlay = true;
             ig.vars.set(varString, true);
           }
 
-          gui = new sc.CustomWorldMapExtra(area.altImg, showOverlay);
+          gui = new sc.CustomWorldMapExtra(area, showOverlay);
           this.addChildGui(gui);
           this.areaGuis.push(gui)
         }
@@ -81,10 +80,18 @@ sc.CustomWorldMapExtra = ig.GuiElementBase.extend({
   gfx: null,
   image: null,
   overlay: null,
-  init(imageData, showOverlay) {
+  init(areaData, showOverlay) {
     this.parent();
+    let imageData = areaData.altImg;
+    if(!imageData) return;
+
     this.setSize(imageData.w, imageData.h);
-    this.setPos(imageData.x, imageData.y);
+    let {x, y} = imageData;
+    if(imageData.positioning === "relative") {
+      x += areaData.position.x;
+      y += areaData.position.y;
+    }
+    this.setPos(x, y);
     this.gfx = new ig.Image(imageData.src);
 
     this.image = new ig.ImageGui(this.gfx, imageData.srcX, imageData.srcY, imageData.w, imageData.h);
