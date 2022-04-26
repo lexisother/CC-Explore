@@ -9,5 +9,44 @@
     "_comment": "Note: this is just using Autumn's Rise as an example."
 },{
     "type": "EXIT",
+    "count": 1
+},{
+    "type": "ENTER",
+    "index": "beach"
+},{
+    "type": "SET_KEY",
+    "index": "altImg",
+    "content": {
+        "src": "media/gui/world-map-extra.png",
+        "x": 227,
+        "y": 262,
+        "w": 29,
+        "h": 22,
+        "srcX": 0,
+        "srcY": 0
+    }
+},{
+    "type": "EXIT"
+},{
+    "type": "ENTER",
+    "index": "final-dng"
+},{
+    "type": "SET_KEY",
+    "index": "altImg",
+    "content": {
+        "src": "media/gui/world-map-extra.png",
+        "x": 45,
+        "y": 74,
+        "w": 31,
+        "h": 51,
+        "srcX": 58,
+        "srcY": 0
+    }
+},{
+    "type": "SET_KEY",
+    "index": "customMap",
+    "content": "explore"
+},{
+    "type": "EXIT",
     "count": 2
 }]

@@ -14,16 +14,32 @@ declare global {
       _addAreaButton(this: this, key: string, area: sc.MapModel.Area): sc.AreaButton;
     }
 
-    interface WorldMapExtra extends ig.GuiElementBase {}
-    interface WorldMapExtraConstructor extends ImpactClass<WorldMapExtra> {
-      new (b: string, c: boolean): WorldMapExtra;
+    interface CustomWorldMapExtra extends ig.GuiElementBase {
+      image: ig.ImageGui;
+      overlay: ig.ImageGui;
+      gfx: ig.Image;
     }
-    let WorldMapExtra: WorldMapExtraConstructor;
+    interface CustomWorldMapExtraConstructor extends ImpactClass<CustomWorldMapExtra> {
+      new (imageData: MapModel.AltImage, showOverlay: boolean): CustomWorldMapExtra;
+    }
+    let CustomWorldMapExtra: CustomWorldMapExtraConstructor;
 
     namespace MapModel {
+      interface AltImage {
+        src: string;
+        srcX: number;
+        srcY: number;
+        x: number;
+        y: number;
+        w: number;
+        h: number;
+        skipOverlay: boolean;
+      }
+
       interface Area {
-        condition: string;
-        customMap: string;
+        condition?: string;
+        customMap?: string;
+        altImg?: MapModel.AltImage;
       }
     }
   }

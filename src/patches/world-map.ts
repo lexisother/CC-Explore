@@ -1,24 +1,5 @@
 import '../ui/components/map-switcher.js';
 
-const dlcAreas = {
-  beach: {
-      x: 227,
-      y: 262,
-      w: 29,
-      h: 22,
-      sx: 0,
-      sy: 0
-  },
-  "final-dng": {
-      x: 45,
-      y: 74,
-      w: 31,
-      h: 51,
-      sx: 58,
-      sy: 0
-  }
-}
-
 sc.MapWorldMap.inject({
   switcher: null,
   // TODO: Use an indexing system that isn't hardcoded
@@ -68,23 +49,6 @@ sc.MapWorldMap.inject({
     }
     this.areaGuis.length = 0;
 
-    // in the future, perhaps some way of allowing custom maps to add "map extensions"
-    // of their own. but for now, just hardcoding the DLC ones as vanilla does.
-    if(this.customMapIndex === "croissant") {
-      for(const key in dlcAreas) {
-        if (sc.map.getVisitedArea(key)) {
-          if (ig.vars.get(`menu.circuit.start.${key}`)) {
-            gui = new sc.WorldMapExtra(key, false);
-          } else {
-            ig.vars.set(`menu.circuit.start.${key}`, true); 
-            gui = new sc.WorldMapExtra(key, true);
-          }
-          this.addChildGui(gui);
-          this.areaGuis.push(gui)
-        }
-      }
-    }
-
     for(const key in areaList) {
       let area = areaList[key]
       if ((!area.condition || (new ig.VarCondition(area.condition)).evaluate()) 
@@ -92,10 +56,77 @@ sc.MapWorldMap.inject({
         // assume that a map is by default supposed to be on the croissant
         && (area.customMap || "croissant") === this.customMapIndex
       ) {
+        if (area.altImg) {
+          let varString = (this.customMapIndex === "croissant") ? `menu.circuit.start.${key}` : `menu.map.${area.customMap}.${key}.start`, 
+            showOverlay = false;
+          if(!(area.altImg.skipOverlay || ig.vars.get(varString))) {
+            showOverlay = true;
+            ig.vars.set(varString, true);
+          }
+
+          gui = new sc.CustomWorldMapExtra(area.altImg, showOverlay);
+          this.addChildGui(gui);
+          this.areaGuis.push(gui)
+        }
+
         gui = this._addAreaButton(key, area);
         this.addChildGui(gui);
         this.areaGuis.push(gui);
       }
+    }
+  }
+});
+
+sc.CustomWorldMapExtra = ig.GuiElementBase.extend({
+  gfx: null,
+  image: null,
+  overlay: null,
+  init(imageData, showOverlay) {
+    this.parent();
+    this.setSize(imageData.w, imageData.h);
+    this.setPos(imageData.x, imageData.y);
+    this.gfx = new ig.Image(imageData.src);
+
+    this.image = new ig.ImageGui(this.gfx, imageData.srcX, imageData.srcY, imageData.w, imageData.h);
+    this.image.hook.transitions = {
+      DEFAULT: {
+        state: {},
+        time: 0.2,
+        timeFunction: KEY_SPLINES.LINEAR
+      },
+      HIDDEN: {
+        state: {
+            alpha: 0
+        },
+        time: 0.2,
+        timeFunction: KEY_SPLINES.LINEAR
+      }
+    };
+    this.addChildGui(this.image);
+    if (showOverlay) {
+      this.overlay = new ig.ImageGui(this.gfx, imageData.srcX + imageData.w, imageData.srcY, imageData.w, imageData.h);
+      this.overlay.renderMode = "lighter";
+      this.overlay.hook.transitions = {
+        DEFAULT: {
+          state: {},
+          time: 0.3,
+          timeFunction: KEY_SPLINES.LINEAR
+        },
+        HIDDEN: {
+          state: {
+              alpha: 0
+          },
+          time: 0.5,
+          timeFunction: KEY_SPLINES.LINEAR
+        }
+      };
+      this.addChildGui(this.overlay);
+      this.image.doStateTransition("HIDDEN", true);
+      this.overlay.doStateTransition("HIDDEN", true);
+      this.overlay.doStateTransition("DEFAULT", false, false, () => {
+        this.image.doStateTransition("DEFAULT", true);
+        this.overlay.doStateTransition("HIDDEN", false, false, null, 0.2)
+      }, 0.4)
     }
   }
 });
