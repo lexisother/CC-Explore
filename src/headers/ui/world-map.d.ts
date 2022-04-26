@@ -1,8 +1,16 @@
 export {};
 
 declare global {
+  namespace ig {
+    interface GuiElementBase {
+      insertChildGui(this: this, guiElement: ig.GuiElementBase, index: number): void;
+    }
+  }
+
   namespace sc {
     interface MapWorldMap extends ig.GuiElementBase {
+      cursor: sc.MapCursor;
+
       switcher: sc.TextCarousel;
       customMapIndex: string;
       customMaps: Record<string, ig.Image>;
@@ -43,5 +51,13 @@ declare global {
         altImg?: MapModel.AltImage;
       }
     }
+
+    interface MapCursor extends ig.GuiElementBase {
+      unfocus(this: this): void;
+    }
+    interface MapCursorConstructor extends ImpactClass<MapCursor> {
+      new (worldmap: boolean): sc.MapCursor;
+    }
+    let MapCursor: MapCursorConstructor
   }
 }

@@ -43,6 +43,8 @@ sc.MapWorldMap.inject({
     let areaList = sc.map.areas;
     let gui: ig.GuiElementBase;
     
+    this.cursor?.unfocus()
+
     for(const areaIcon of this.areaGuis) {
       this.removeChildGui(areaIcon)
     }
@@ -64,12 +66,12 @@ sc.MapWorldMap.inject({
           }
 
           gui = new sc.CustomWorldMapExtra(area, showOverlay);
-          this.addChildGui(gui);
+          this.insertChildGui(gui, 0);
           this.areaGuis.push(gui)
         }
 
         gui = this._addAreaButton(key, area);
-        this.addChildGui(gui);
+        this.insertChildGui(gui, 1);
         this.areaGuis.push(gui);
       }
     }
