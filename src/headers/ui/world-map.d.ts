@@ -8,13 +8,19 @@ declare global {
   }
 
   namespace sc {
+    interface CustomWorldMapEntry {
+      image: ig.Image;
+      condition?: string;
+    }
+    let CUSTOM_WORLD_MAPS: Record<string, sc.CustomWorldMapEntry>;
+
     interface MapWorldMap extends ig.GuiElementBase {
       cursor: sc.MapCursor;
 
       switcher: sc.TextCarousel;
       customMapIndex: string;
-      customMaps: Record<string, ig.Image>;
       areaGuis: ig.GuiElementBase[];
+      customMaps: string[];
 
       show(this: this): void;
       _addAreas(this: this): void;

@@ -1,18 +1,24 @@
 import '../ui/components/map-switcher.js';
 
+sc.CUSTOM_WORLD_MAPS = {
+  explore: {
+    image: new ig.Image("media/gui/world-maps/explore.png")
+  }
+}
+
 sc.MapWorldMap.inject({
   switcher: null,
-  // TODO: Use an indexing system that isn't hardcoded
-  customMaps: {
-    explore: new ig.Image("media/gui/world-maps/explore.png")
-  },
   customMapIndex: "croissant",
   areaGuis: [],
+  customMaps: [],
 
   init() {
-    
     this.parent();
-    this.switcher = new sc.TextCarousel('sc.gui.menu.world.page', ['croissant', 'explore']);
+    Object.entries(sc.CUSTOM_WORLD_MAPS).forEach(([key, value]) => {
+      if(new ig.VarCondition(value.condition).evaluate()) this.customMaps.push(key);
+    })
+
+    this.switcher = new sc.TextCarousel('sc.gui.menu.world.page', ['croissant', ...this.customMaps]);
     
     this.switcher.setAlign(ig.GUI_ALIGN.X_RIGHT, ig.GUI_ALIGN.Y_TOP);
     this.switcher.setPos(25, 27);
@@ -20,20 +26,20 @@ sc.MapWorldMap.inject({
     
     this.addChildGui(this.switcher);
   },
+
   show() {
     this.parent();
     this.switcher.show();
   },
 
   onMapSwitch(index) {
-    // TODO: in the future, make this not be hardcoded
-    this.customMapIndex = index === 0 ? "croissant" : "explore";
+    this.customMapIndex = ['croissant', ...this.customMaps][index];
     this._addAreas();
   },
 
   updateDrawables(a) {
     if (this.customMapIndex === "croissant") this.parent(a);
-    else a.addGfx(this.customMaps[this.customMapIndex], 0, 0, 0, 0, this.hook.size.x, this.hook.size.y)
+    else a.addGfx(sc.CUSTOM_WORLD_MAPS[this.customMapIndex].image, 0, 0, 0, 0, this.hook.size.x, this.hook.size.y)
   },
 
   // unfortunately, i don't think there is any better way to handle this.
