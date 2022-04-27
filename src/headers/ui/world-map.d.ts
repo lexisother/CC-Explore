@@ -8,16 +8,12 @@ declare global {
   }
 
   namespace sc {
-    interface CustomWorldMapEntry {
-      image: ig.Image;
-      condition?: string;
-    }
-    let CUSTOM_WORLD_MAPS: Record<string, sc.CustomWorldMapEntry>;
+    let CUSTOM_WORLD_MAPS: Record<string, ig.Image>;
 
     interface MapWorldMap extends ig.GuiElementBase {
       cursor: sc.MapCursor;
 
-      switcher: sc.TextCarousel;
+      switcher: sc.TextCarousel | undefined;
       customMapIndex: string;
       areaGuis: ig.GuiElementBase[];
       customMaps: string[];
@@ -56,6 +52,10 @@ declare global {
         customMap?: string;
         altImg?: MapModel.AltImage;
       }
+    }
+
+    interface MapModel {
+      getUnlockedAreas(this: this): string[]
     }
 
     interface MapCursor extends ig.GuiElementBase {

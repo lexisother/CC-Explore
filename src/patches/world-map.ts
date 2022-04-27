@@ -1,10 +1,9 @@
 import '../ui/components/map-switcher.js';
 
 sc.CUSTOM_WORLD_MAPS = {
-  explore: {
-    image: new ig.Image("media/gui/world-maps/explore.png")
-  }
+  explore: new ig.Image("media/gui/world-maps/explore.png")
 }
+
 
 sc.MapWorldMap.inject({
   switcher: null,
@@ -14,32 +13,41 @@ sc.MapWorldMap.inject({
 
   init() {
     this.parent();
-    Object.entries(sc.CUSTOM_WORLD_MAPS).forEach(([key, value]) => {
-      if(new ig.VarCondition(value.condition).evaluate()) this.customMaps.push(key);
+    sc.map.getUnlockedAreas().forEach(area => {
+      let map = sc.map.areas[area].customMap || "croissant";
+      if(!this.customMaps.includes(map)) this.customMaps.push(map)
     })
 
-    this.switcher = new sc.TextCarousel('sc.gui.menu.world.page', ['croissant', ...this.customMaps]);
-    
-    this.switcher.setAlign(ig.GUI_ALIGN.X_RIGHT, ig.GUI_ALIGN.Y_TOP);
-    this.switcher.setPos(25, 27);
-    this.switcher.onChange = this.onMapSwitch.bind(this)
-    
-    this.addChildGui(this.switcher);
+    let currentMap = sc.map.areas[sc.map.currentArea.path].customMap || "croissant"
+    this.customMapIndex = currentMap;
+
+    if(this.customMaps.length > 1) {
+      this.switcher = new sc.TextCarousel('sc.gui.menu.world.page', this.customMaps);
+  
+      this.switcher.setAlign(ig.GUI_ALIGN.X_RIGHT, ig.GUI_ALIGN.Y_TOP);
+      this.switcher.setPos(25, 27);
+      this.switcher.onChange = this.onMapSwitch.bind(this);
+
+      this.switcher.updateStatusPage(this.customMaps.indexOf(currentMap))
+
+      this.addChildGui(this.switcher);
+    }
+    this._addAreas();
   },
 
   show() {
     this.parent();
-    this.switcher.show();
+    this.switcher?.show();
   },
 
   onMapSwitch(index) {
-    this.customMapIndex = ['croissant', ...this.customMaps][index];
+    this.customMapIndex = this.customMaps[index];
     this._addAreas();
   },
 
   updateDrawables(a) {
     if (this.customMapIndex === "croissant") this.parent(a);
-    else a.addGfx(sc.CUSTOM_WORLD_MAPS[this.customMapIndex].image, 0, 0, 0, 0, this.hook.size.x, this.hook.size.y)
+    else a.addGfx(sc.CUSTOM_WORLD_MAPS[this.customMapIndex], 0, 0, 0, 0, this.hook.size.x, this.hook.size.y)
   },
 
   // unfortunately, i don't think there is any better way to handle this.
