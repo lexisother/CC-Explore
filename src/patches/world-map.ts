@@ -1,4 +1,5 @@
 import '../ui/components/map-switcher.js';
+import '../ui/components/text-carousel.js';
 
 sc.CUSTOM_WORLD_MAPS = {
   explore: new ig.Image("media/gui/world-maps/explore.png")

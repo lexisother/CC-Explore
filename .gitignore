@@ -1,3 +1,4 @@
 ##### NODE #####
 /node_modules/
 /dist/
+*.code-workspace

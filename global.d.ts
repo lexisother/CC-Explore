@@ -6,3 +6,4 @@ import './src/headers/startGui';
 import './src/headers/ui/timer';
 import './src/headers/ui/polyfills';
 import './src/headers/ui/explore';
+import './src/headers/ui/components/text-carousel';
