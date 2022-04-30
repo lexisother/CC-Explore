@@ -30,7 +30,9 @@ sc.TextCarousel = ig.GuiElementBase.extend({
       newText.setAlign(ig.GUI_ALIGN.X_CENTER, ig.GUI_ALIGN.Y_CENTER);
       newText.transitions = {};
       newText.transitions.DEFAULT = {
-        state: {},
+        state: {
+					alpha: 0
+				},
         time: 0,
         timeFunction: KEY_SPLINES.LINEAR,
       };
